@@ -1,0 +1,20 @@
+.JobCard {
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
+}
+.JobCard:hover {
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+}
+.JobCardBody {
+    height: 250px;
+    overflow: hidden;
+    mask-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0));
+}
+.JobCardBody-description {
+    white-space: pre-wrap;
+    text-align: left;
+}
+.JobCard-ShowMoreText {
+    position: relative;
+    top: -20px;
+}

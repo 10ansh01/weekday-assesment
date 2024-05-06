@@ -1,3 +1,12 @@
+import { Container } from "@mui/material";
+import JobListing from "./components/JobListing";
+import { Filters } from "./components/Filters";
+
 export const App = () => {
-  return <h1>Hello</h1>;
+  return (
+    <Container maxWidth="lg" sx={{ marginTop: "30px" }}>
+      <Filters />
+      <JobListing />
+    </Container>
+  );
 };

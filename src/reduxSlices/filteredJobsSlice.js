@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { filterJobs } from "./filterUtils/filter-jobs";
+import { filterJobs, filterOnSiteOrRemote } from "./filterUtils/filter-jobs";
 
 const initialState = [];
 
@@ -8,8 +8,20 @@ export const filteredJobsSlice = createSlice({
   initialState,
   reducers: {
     updateFilteredJobs: (state, action) => {
-      const { jobsToFilter, selectedFilters } = action.payload;
-      const filteredJobsList = filterJobs(jobsToFilter, selectedFilters);
+      const { jobsToFilter, selectedFilters, keyToFilter } = action.payload;
+      let filteredJobsList;
+      if (keyToFilter === "selectedWorkMode") {
+        filteredJobsList = filterOnSiteOrRemote(
+          jobsToFilter,
+          selectedFilters["selectedWorkMode"][0]
+        );
+      } else {
+        filteredJobsList = filterJobs(
+          jobsToFilter,
+          selectedFilters,
+          keyToFilter
+        );
+      }
 
       console.log(filteredJobsList, "getOptionLabel");
       //I am replacing the already present job data with the new filtered data.

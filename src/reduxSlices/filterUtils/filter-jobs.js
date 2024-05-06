@@ -33,3 +33,26 @@ export const filterJobs = (jobs, selectedFilters, keyToFilter = null) => {
   }
   return [];
 };
+
+export const filterOnSiteOrRemote = (jobs, locationType) => {
+  return jobs.filter((job) => {
+    //if Location Type is remote, then filter out remote jobs
+    if (
+      locationType &&
+      job.location === "remote" &&
+      locationType === "remote"
+    ) {
+      return true;
+    } else if (
+      //if location type is not remote, filter out onsite jobs
+      locationType &&
+      locationType !== "remote" &&
+      job.location !== "remote"
+    ) {
+      return true;
+    } else {
+      //if locationTypeIsUndefined, do not filter
+      return false;
+    }
+  });
+};

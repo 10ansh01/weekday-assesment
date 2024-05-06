@@ -4,11 +4,11 @@ const initialState = {
   isFilterSelected: false,
   selectedLocations: [],
   selectedCompanyNames: [],
-  selectedExperience: null,
+  selectedExperience: [],
   selectedTechStack: [],
   selectedJobRole: [],
-  selectedMinPay: null,
-  selectedWorkMode: null,
+  selectedMinPay: [],
+  selectedWorkMode: [],
 };
 
 export const selectedFiltersSlice = createSlice({
@@ -22,7 +22,7 @@ export const selectedFiltersSlice = createSlice({
       if (multiple && !state[filterType].includes(filterValue)) {
         state[filterType].push(filterValue);
       } else {
-        state[filterType] = filterValue;
+        state[filterType] = [filterValue];
       }
     },
     removeFilter: (state, action) => {

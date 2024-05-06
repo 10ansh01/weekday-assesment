@@ -8,7 +8,7 @@ const initialState = {
   TechStackFilterOptions: [],
   RoleFilterOptions: [],
   MinPayFilterOptions: [],
-  WorkModeFilterOptions: ["Remote", "Onsite"],
+  WorkModeFilterOptions: ["remote", "Onsite"],
 };
 
 export const filterOptionsSlice = createSlice({

@@ -34,14 +34,24 @@ const JobListing = () => {
         setTotalJobs(response.data.totalCount);
         setOffset(offset + 10);
         dispatch(addJobs(response.data.jdList));
-        dispatch(addFilterOptions(response.data.jdList));
-
         // if there is any filter selected already and the user reaches end of the page resulting
         // in more jobs LocalAtmRounded, in that case the new jobs will be filtered out before rendering
         // (jobs will be filtered out according to the applied filters)
-        if (selectedFilters.isFilterSelected) {
-          dispatch(updateFilteredJobs({ jobsToFilter: jobs, selectedFilters }));
+        for (const filterType in selectedFilters) {
+          if (
+            selectedFilters[filterType] &&
+            selectedFilters[filterType].length > 0
+          ) {
+            dispatch(
+              updateFilteredJobs({
+                jobsToFilter: jobs,
+                selectedFilters,
+                keyToFilter: filterType,
+              })
+            );
+          }
         }
+        dispatch(addFilterOptions(response.data.jdList));
       })
       .catch((err) => {
         console.error(err);
@@ -52,8 +62,6 @@ const JobListing = () => {
         setFirstLoad(true);
       });
   };
-
-  useEffect(() => {}, [jobs]);
 
   useEffect(() => {
     setJobData(filteredJobs && filteredJobs.length > 0 ? filteredJobs : jobs);

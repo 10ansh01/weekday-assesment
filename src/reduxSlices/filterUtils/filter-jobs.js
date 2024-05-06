@@ -56,3 +56,11 @@ export const filterOnSiteOrRemote = (jobs, locationType) => {
     }
   });
 };
+
+export const filterMoreThanBase = (jobs, requiredBasePay) => {
+  return jobs.filter((job) => {
+    if (job.minJdSalary >= requiredBasePay) {
+      return true;
+    }
+  });
+};

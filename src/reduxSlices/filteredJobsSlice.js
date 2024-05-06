@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { filterJobs, filterOnSiteOrRemote } from "./filterUtils/filter-jobs";
+import {
+  filterJobs,
+  filterMoreThanBase,
+  filterOnSiteOrRemote,
+} from "./filterUtils/filter-jobs";
 
 const initialState = [];
 
@@ -10,7 +14,13 @@ export const filteredJobsSlice = createSlice({
     updateFilteredJobs: (state, action) => {
       const { jobsToFilter, selectedFilters, keyToFilter } = action.payload;
       let filteredJobsList;
-      if (keyToFilter === "selectedWorkMode") {
+
+      if (keyToFilter === "selectedMinPay") {
+        filteredJobsList = filterMoreThanBase(
+          jobsToFilter,
+          selectedFilters["selectedMinPay"][0]
+        );
+      } else if (keyToFilter === "selectedWorkMode") {
         filteredJobsList = filterOnSiteOrRemote(
           jobsToFilter,
           selectedFilters["selectedWorkMode"][0]

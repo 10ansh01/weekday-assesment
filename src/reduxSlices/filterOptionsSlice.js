@@ -7,7 +7,7 @@ const initialState = {
   ExperienceFilterOptions: [],
   TechStackFilterOptions: [],
   RoleFilterOptions: [],
-  MinPayFilterOptions: [],
+  MinPayFilterOptions: [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   WorkModeFilterOptions: ["remote", "Onsite"],
 };
 
@@ -32,9 +32,6 @@ export const filterOptionsSlice = createSlice({
       const newRoleFilterOptions = payload
         .map((job) => job.jobRole)
         .filter(Boolean);
-      const newMinPayFilterOptions = payload
-        .map((job) => job.minJdSalary)
-        .filter(Boolean);
 
       state.LocationFilterOptions = combineAndSortArrays(
         state.LocationFilterOptions,
@@ -55,10 +52,6 @@ export const filterOptionsSlice = createSlice({
       state.RoleFilterOptions = combineAndSortArrays(
         state.RoleFilterOptions,
         newRoleFilterOptions
-      );
-      state.MinPayFilterOptions = combineAndSortArrays(
-        state.MinPayFilterOptions,
-        newMinPayFilterOptions
       );
     },
   },

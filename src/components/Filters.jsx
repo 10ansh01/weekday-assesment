@@ -18,6 +18,9 @@ export const Filters = () => {
       <Grid item>
         <RolesFilter />
       </Grid>
+      <Grid item>
+        <MinBasePayFilter />
+      </Grid>
     </Grid>
   );
 };

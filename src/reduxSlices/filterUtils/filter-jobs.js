@@ -8,7 +8,14 @@ const selectedFilterKeyMap = {
   selectedWorkMode: "location",
 };
 
-export const filterJobs = (jobs, selectedFilters) => {
+export const filterJobs = (jobs, selectedFilters, keyToFilter = null) => {
+  if (keyToFilter) {
+    return jobs.filter((job) =>
+      selectedFilters[keyToFilter].includes(
+        job[selectedFilterKeyMap[keyToFilter]]
+      )
+    );
+  }
   if (jobs && jobs.length > 0 && selectedFilters) {
     return jobs.filter((job) => {
       for (const filterType in selectedFilters) {

@@ -7,8 +7,9 @@ import {
   removeFilter,
 } from "../../reduxSlices/selectedFiltersSlice";
 import { updateFilteredJobs } from "../../reduxSlices/filteredJobsSlice";
+import { isAnyOtherFilterAlreadySelected } from "../../reduxSlices/filterUtils/is-any-filter-selected";
 
-export const RolesFilter = () => {
+export const RolesFilter = React.memo(() => {
   const RoleFilterOption = useSelector(
     (state) => state.filtersList.RoleFilterOptions
   );
@@ -48,15 +49,22 @@ export const RolesFilter = () => {
   };
 
   useEffect(() => {
-    const jobsToFilter =
-      filteredJobs && filteredJobs.length > 0
-        ? filteredJobs
-        : jobs && jobs.length > 0 && jobs;
+    const isAnyOtherFilterSelected = isAnyOtherFilterAlreadySelected(
+      selectedFilters,
+      "selectedJobRole"
+    );
+    const jobsToFilter = isAnyOtherFilterSelected ? filteredJobs : jobs;
 
     if (Object.keys(selectedFilters).length > 0) {
-      dispatch(updateFilteredJobs({ jobsToFilter: jobs, selectedFilters }));
+      dispatch(
+        updateFilteredJobs({
+          jobsToFilter,
+          selectedFilters,
+          keyToFilter: "selectedJobRole",
+        })
+      );
     }
-  }, [selectedFilters]);
+  }, [selectedFilters["selectedJobRole"]]);
 
   return (
     <>
@@ -69,4 +77,4 @@ export const RolesFilter = () => {
       />
     </>
   );
-};
+});

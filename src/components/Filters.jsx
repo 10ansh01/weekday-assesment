@@ -12,7 +12,9 @@ export const Filters = () => {
       <Grid item>
         <LocationFilter />
       </Grid>
-
+      <Grid item>
+        <WorkModeFilter />
+      </Grid>
       <Grid item>
         <RolesFilter />
       </Grid>

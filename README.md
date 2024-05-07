@@ -19,7 +19,7 @@
             (contains all the components)
             - Filters/
                 (contains Individual filter component for each filter)
-            - JobCardSubComponents
+            - JobCardSubComponents/
                 (I have divided Job card in 3 parts: Head, Body, Foot. This folder has components
                 for those.)
             - utilityComponents/

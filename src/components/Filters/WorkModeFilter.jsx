@@ -5,7 +5,7 @@ import {
   addSelectedFilter,
   removeFilter,
 } from "../../reduxSlices/selectedFiltersSlice";
-import useFilteredJobsUpdater from "./useFilteredJobsUpdater";
+import useFilteredJobsUpdater from "../../hooks/useFilteredJobsUpdater";
 
 export const WorkModeFilter = React.memo(() => {
   const WorkModeFilterOption = useSelector(

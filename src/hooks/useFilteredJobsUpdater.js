@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { handleJobsToFilter } from "../../reduxSlices/filterUtils/filter-jobs";
-import { isAnyOtherFilterAlreadySelected } from "../../reduxSlices/filterUtils/is-any-filter-selected";
-import { updateFilteredJobs } from "../../reduxSlices/filteredJobsSlice";
+import { handleJobsToFilter } from "../reduxSlices/filterUtils/filter-jobs";
+import { isAnyOtherFilterAlreadySelected } from "../reduxSlices/filterUtils/is-any-filter-selected";
+import { updateFilteredJobs } from "../reduxSlices/filteredJobsSlice";
 
 const useFilteredJobsUpdater = (
   filterKey,

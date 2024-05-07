@@ -8,7 +8,7 @@ import {
 } from "../../reduxSlices/selectedFiltersSlice";
 import { updateFilteredJobs } from "../../reduxSlices/filteredJobsSlice";
 import { isAnyOtherFilterAlreadySelected } from "../../reduxSlices/filterUtils/is-any-filter-selected";
-import useFilteredJobsUpdater from "./useFilteredJobsUpdater";
+import useFilteredJobsUpdater from "../../hooks/useFilteredJobsUpdater";
 
 export const LocationFilter = () => {
   const LocationFilterOption = useSelector(

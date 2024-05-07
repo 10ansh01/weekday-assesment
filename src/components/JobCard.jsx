@@ -17,14 +17,14 @@ const JobCardView = styled(Paper)(({ theme }) => ({
 
 const JobCard = (props) => {
   const currency = getCurrencySymbol(props.salaryCurrencyCode);
-  const salaryRange = `Estimated Salary: ${currency}${
-    props.minJdSalary
-  }K - ${currency}${props.maxJdSalary}K ${"\u2705"}`;
+
   return (
     <JobCardView className="JobCard" square={false} elevation={1}>
       <JobCardHead {...props} />
       <CustomTypography variant="body1" sx={{ minHeight: "20px" }}>
-        {(props.minJdSalary || props.maxJdSalary) && salaryRange}
+        Estimated Salary :{" "}
+        {props.minJdSalary && currency + props.minJdSalary + "K" + " - "}
+        {props.maxJdSalary && currency + props.maxJdSalary}K {"\u2705"}
       </CustomTypography>
       <JobCardBody {...props} />
       <Box class="JobCard-ShowMoreText">

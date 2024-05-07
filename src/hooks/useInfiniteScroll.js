@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-const useInfiniteScroll = (action) => {
+const useInfiniteScroll = (action, offset) => {
   const [loading, setLoading] = useState(false);
 
   const handleScroll = () => {
-    const windowHeight = window.innerHeight
+    const windowHeight = window.innerHeight;
     const body = document.body;
     const html = document.documentElement;
 
@@ -12,7 +12,7 @@ const useInfiniteScroll = (action) => {
     if (windowBottom >= body.scrollHeight && !loading) {
       setLoading(true);
       action().then(() => {
-        setLoading(false); 
+        setLoading(false);
       });
     }
   };
@@ -20,7 +20,7 @@ const useInfiniteScroll = (action) => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading]);
+  }, [loading, offset]);
 
   return loading;
 };

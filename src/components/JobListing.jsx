@@ -81,7 +81,7 @@ const JobListing = () => {
   }, [jobs.length, filteredJobs]);
 
   //I made a custom hook to implement infinite scroll functionality
-  useInfiniteScroll(fetchData);
+  useInfiniteScroll(fetchData, offset);
 
   useEffect(() => {
     if (!firstLoad) {

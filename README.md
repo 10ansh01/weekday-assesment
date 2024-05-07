@@ -76,3 +76,10 @@
   - Now if he/she wants to filter jobs, the user will have to scroll all the way to the top to apply filter
   - I would suggest that in this case, if the user scrolls a little bit up, a floating header should pop-up/fall from the top with all the filters
   - This way user can apply filters without scrolling all the way to the top.
+
+# THIS WAS A REALLY EXCITING CHALLENGE FOR ME. I HONESTLY ENJOYED IT.
+
+# HOPING TO DISCUSS MORE ON THIS.
+
+THANKS
+Ansh

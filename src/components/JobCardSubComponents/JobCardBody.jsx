@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid, Box } from "@mui/material";
 import CustomTypography from "../utilityComponents/CustomTypography";
 import "../../styles/JobListing.css";

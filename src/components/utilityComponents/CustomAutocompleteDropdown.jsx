@@ -26,7 +26,6 @@ export const CustomAutocompleteDropdown = ({
   renderTags,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState(defaultValue || []);
-  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleFilterChange = (event, newValue) => {
     setSelectedOptions(newValue);

@@ -8,7 +8,6 @@ import { addSelectedFilter } from "../../reduxSlices/selectedFiltersSlice";
 
 export const CompanyNameFilter = () => {
   const [inputValue, setInputValue] = useState("");
-  const [filteredJobs, setFilteredJobs] = useState([]);
 
   const jobs = useSelector((state) => state.jobs);
   const selectedFilters = useSelector((state) => state.selectedFilters);
@@ -19,7 +18,6 @@ export const CompanyNameFilter = () => {
     const filtered = jobs.filter((job) =>
       job.companyName.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setFilteredJobs(filtered);
 
     dispatch(
       addSelectedFilter({

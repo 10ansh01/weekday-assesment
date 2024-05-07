@@ -11,17 +11,13 @@ export const WorkModeFilter = React.memo(() => {
   const WorkModeFilterOption = useSelector(
     (state) => state.filtersList.WorkModeFilterOptions
   );
-  const jobs = useSelector((state) => state.jobs);
   const selectedFilters = useSelector((state) => state.selectedFilters);
-  const filteredJobs = useSelector((state) => state.filteredJobs);
 
   const dispatch = useDispatch();
 
-  const [selectedFilterOptions, setSelectedFilterOptions] = useState([]);
   const [filterRemoved, setFilterRemoved] = useState(true);
 
   const handleFilterChange = (newValue) => {
-    setSelectedFilterOptions(newValue);
     const newValueInArray = newValue ? [newValue] : [];
 
     //If Block -> Remove removed filter from redux

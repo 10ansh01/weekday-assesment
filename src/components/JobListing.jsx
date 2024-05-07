@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, CircularProgress } from "@mui/material";
-import JobCard from "./JobCard";
 import { addJobs } from "../reduxSlices/jobsSlice";
 import axios from "axios";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import { addFilterOptions } from "../reduxSlices/filterOptionsSlice";
 import { updateFilteredJobs } from "../reduxSlices/filteredJobsSlice";
 import CustomTypography from "./utilityComponents/CustomTypography";
+
+const JobCard = lazy(() => import("./JobCard"));
 
 const JobListing = () => {
   const [jobData, setJobData] = useState([]);
@@ -160,7 +161,9 @@ const JobListing = () => {
           jobData &&
           jobData.slice(0, totalJobs).map((job, index) => (
             <Grid item xs={12} md={6} lg={4} key={index}>
-              <JobCard {...job} />
+              <Suspense fallback={<CircularProgress />}>
+                <JobCard {...job} />
+              </Suspense>
             </Grid>
           ))}
 

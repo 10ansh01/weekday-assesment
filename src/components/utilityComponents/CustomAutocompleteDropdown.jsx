@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/system";
@@ -20,12 +20,13 @@ export const CustomAutocompleteDropdown = ({
   getOptionLabel,
   defaultValue,
   onChange,
-  placeholder,
+  label,
   minWidth,
   multiple = true,
   renderTags,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState(defaultValue || []);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleFilterChange = (event, newValue) => {
     setSelectedOptions(newValue);
@@ -45,10 +46,15 @@ export const CustomAutocompleteDropdown = ({
       renderInput={(params) => (
         <CustomTextField
           {...params}
-          placeholder={placeholder}
+          label={label}
           InputProps={{
             ...params.InputProps,
             sx: { fontSize: "13px", height: "40px" },
+          }}
+          InputLabelProps={{
+            sx: {
+              fontSize: "13px",
+            },
           }}
         />
       )}

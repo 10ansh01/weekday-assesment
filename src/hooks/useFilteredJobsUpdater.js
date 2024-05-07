@@ -54,7 +54,6 @@ const useFilteredJobsUpdater = (
       })
     );
 
-    // Reset the filterRemoved flag
     setFilterRemoved(false);
   }, [filterKey, selectedFilters, filterRemoved, jobs]);
 };

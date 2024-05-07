@@ -72,3 +72,9 @@ export const filterExperience = (jobs, requiredMaxExperience = 200) => {
     (job) => job.minExp !== null && job.minExp <= requiredMaxExperience
   );
 };
+
+export const filterCompanyNames = (jobs, enteredCompanyName) => {
+  return jobs.filter((job) =>
+    job.companyName.toLowerCase().includes(enteredCompanyName.toLowerCase())
+  );
+};

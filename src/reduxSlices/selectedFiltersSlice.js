@@ -21,6 +21,8 @@ export const selectedFiltersSlice = createSlice({
 
       if (multiple && !state[filterType].includes(filterValue)) {
         state[filterType].push(filterValue);
+      } else if (filterValue.length === 0) {
+        state[filterType] = [];
       } else {
         state[filterType] = [filterValue];
       }

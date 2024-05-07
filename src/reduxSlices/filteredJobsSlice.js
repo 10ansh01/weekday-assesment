@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  filterCompanyNames,
   filterExperience,
   filterJobs,
   filterMoreThanBase,
@@ -16,7 +17,12 @@ export const filteredJobsSlice = createSlice({
       const { jobsToFilter, selectedFilters, keyToFilter } = action.payload;
       let filteredJobsList;
 
-      if (keyToFilter === "selectedExperience") {
+      if (keyToFilter === "selectedCompanyNames") {
+        filteredJobsList = filterCompanyNames(
+          jobsToFilter,
+          selectedFilters["selectedCompanyNames"][0]
+        );
+      } else if (keyToFilter === "selectedExperience") {
         filteredJobsList = filterExperience(
           jobsToFilter,
           selectedFilters["selectedExperience"][0]

@@ -3,7 +3,6 @@ import { combineAndSortArrays } from "./filterUtils/combine-and-sort-arrays";
 
 const initialState = {
   LocationFilterOptions: [],
-  CompanyNameFilterOptions: [],
   ExperienceFilterOptions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   TechStackFilterOptions: [],
   RoleFilterOptions: [],
@@ -20,9 +19,6 @@ export const filterOptionsSlice = createSlice({
       const newLocationFilterOptions = payload
         .map((job) => job.location)
         .filter(Boolean);
-      const newCompanyNameFilterOptions = payload
-        .map((job) => job.companyName)
-        .filter(Boolean);
       const newTechStackFilterOptions = payload
         .map((job) => job.techStack)
         .filter(Boolean);
@@ -33,10 +29,6 @@ export const filterOptionsSlice = createSlice({
       state.LocationFilterOptions = combineAndSortArrays(
         state.LocationFilterOptions,
         newLocationFilterOptions
-      );
-      state.CompanyNameFilterOptions = combineAndSortArrays(
-        state.CompanyNameFilterOptions,
-        newCompanyNameFilterOptions
       );
       state.TechStackFilterOptions = combineAndSortArrays(
         state.TechStackFilterOptions,

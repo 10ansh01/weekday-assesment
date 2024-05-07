@@ -8,18 +8,21 @@ import { MinBasePayFilter } from "./Filters/MinBasePay";
 
 export const Filters = () => {
   return (
-    <Grid container direction="row" spacing={2}>
+    <Grid container direction="row" spacing={1}>
       <Grid item>
-        <LocationFilter />
+        <RolesFilter />
+      </Grid>
+      <Grid item>
+        <MaxExperienceFilter />
       </Grid>
       <Grid item>
         <WorkModeFilter />
       </Grid>
       <Grid item>
-        <RolesFilter />
+        <MinBasePayFilter />
       </Grid>
       <Grid item>
-        <MinBasePayFilter />
+        <LocationFilter />
       </Grid>
     </Grid>
   );

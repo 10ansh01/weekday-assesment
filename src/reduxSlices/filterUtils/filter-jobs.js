@@ -1,4 +1,4 @@
-const selectedFilterKeyMap = {
+export const selectedFilterKeyMap = {
   selectedLocations: "location",
   selectedCompanyNames: "companyName",
   selectedExperience: "minExp",
@@ -6,6 +6,22 @@ const selectedFilterKeyMap = {
   selectedJobRole: "jobRole",
   selectedMinPay: "minJdSalary",
   selectedWorkMode: "location",
+};
+
+export const handleJobsToFilter = (
+  jobs,
+  selectedFilters,
+  keyToFilter = null
+) => {
+  if (keyToFilter === "selectedExperience") {
+    return filterExperience(jobs, selectedFilters[keyToFilter][0]);
+  } else if (keyToFilter === "selectedMinPay") {
+    return filterMoreThanBase(jobs, selectedFilters[keyToFilter][0]);
+  } else if (keyToFilter === "selectedWorkMode") {
+    return filterOnSiteOrRemote(jobs, selectedFilters[keyToFilter][0]);
+  } else {
+    return filterJobs(jobs, selectedFilters, keyToFilter);
+  }
 };
 
 export const filterJobs = (jobs, selectedFilters, keyToFilter = null) => {
@@ -47,4 +63,12 @@ export const filterMoreThanBase = (jobs, requiredBasePay = 0) => {
       return true;
     }
   });
+};
+
+export const filterExperience = (jobs, requiredMaxExperience = 200) => {
+  //in case requiredMaxExp is undefined, the value to compare from should be large enough so
+  // that all the jobs are returned and no jobs are filtered out
+  return jobs.filter(
+    (job) => job.minExp !== null && job.minExp <= requiredMaxExperience
+  );
 };

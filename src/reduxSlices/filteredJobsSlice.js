@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  filterExperience,
   filterJobs,
   filterMoreThanBase,
   filterOnSiteOrRemote,
@@ -15,7 +16,12 @@ export const filteredJobsSlice = createSlice({
       const { jobsToFilter, selectedFilters, keyToFilter } = action.payload;
       let filteredJobsList;
 
-      if (keyToFilter === "selectedMinPay") {
+      if (keyToFilter === "selectedExperience") {
+        filteredJobsList = filterExperience(
+          jobsToFilter,
+          selectedFilters["selectedExperience"][0]
+        );
+      } else if (keyToFilter === "selectedMinPay") {
         filteredJobsList = filterMoreThanBase(
           jobsToFilter,
           selectedFilters["selectedMinPay"][0]

@@ -10,9 +10,9 @@ import { updateFilteredJobs } from "../../reduxSlices/filteredJobsSlice";
 import { isAnyOtherFilterAlreadySelected } from "../../reduxSlices/filterUtils/is-any-filter-selected";
 import useFilteredJobsUpdater from "./useFilteredJobsUpdater";
 
-export const MinBasePayFilter = React.memo(() => {
-  const MinPayFilterOption = useSelector(
-    (state) => state.filtersList.MinPayFilterOptions
+export const MaxExperienceFilter = React.memo(() => {
+  const ExperienceFilterOption = useSelector(
+    (state) => state.filtersList.ExperienceFilterOptions
   );
   const jobs = useSelector((state) => state.jobs);
   const selectedFilters = useSelector((state) => state.selectedFilters);
@@ -29,16 +29,16 @@ export const MinBasePayFilter = React.memo(() => {
 
     //If Block -> Remove removed filter from redux
     // Else Block -> Add selected filter to redux
-    if (newValueInArray.length < selectedFilters["selectedMinPay"].length) {
-      let removedFilterOption = selectedFilters["selectedMinPay"][0];
+    if (newValueInArray.length < selectedFilters["selectedExperience"].length) {
+      let removedFilterOption = selectedFilters["selectedExperience"][0];
       setFilterRemoved(true);
       dispatch(
-        removeFilter({ removedFilterOption, keyToFilter: "selectedMinPay" })
+        removeFilter({ removedFilterOption, keyToFilter: "selectedExperience" })
       );
     } else {
       dispatch(
         addSelectedFilter({
-          filterType: "selectedMinPay",
+          filterType: "selectedExperience",
           filterValue: newValueInArray[newValueInArray.length - 1],
           multiple: false,
         })
@@ -47,7 +47,7 @@ export const MinBasePayFilter = React.memo(() => {
   };
 
   useFilteredJobsUpdater(
-    "selectedMinPay",
+    "selectedExperience",
     selectedFilters,
     filterRemoved,
     setFilterRemoved
@@ -56,11 +56,11 @@ export const MinBasePayFilter = React.memo(() => {
   return (
     <>
       <CustomAutocompleteDropdown
-        options={MinPayFilterOption}
+        options={ExperienceFilterOption}
         getOptionLabel={(option) => option.toString()}
         onChange={handleFilterChange}
-        label="Min Base Pay Salary"
-        minWidth={200}
+        label="Experience"
+        minWidth={150}
         multiple={false}
       />
     </>

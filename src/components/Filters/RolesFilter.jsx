@@ -8,6 +8,7 @@ import {
 } from "../../reduxSlices/selectedFiltersSlice";
 import { updateFilteredJobs } from "../../reduxSlices/filteredJobsSlice";
 import { isAnyOtherFilterAlreadySelected } from "../../reduxSlices/filterUtils/is-any-filter-selected";
+import useFilteredJobsUpdater from "./useFilteredJobsUpdater";
 
 export const RolesFilter = React.memo(() => {
   const RoleFilterOption = useSelector(
@@ -20,7 +21,7 @@ export const RolesFilter = React.memo(() => {
   const dispatch = useDispatch();
 
   const [selectedFilterOptions, setSelectedFilterOptions] = useState([]);
-  const [filterRemoved, setFiterRemoved] = useState(true);
+  const [filterRemoved, setFilterRemoved] = useState(true);
 
   const handleFilterChange = (newValue) => {
     setSelectedFilterOptions(newValue);
@@ -34,7 +35,7 @@ export const RolesFilter = React.memo(() => {
           removedFilterOption = element;
         }
       });
-      setFiterRemoved(true);
+      setFilterRemoved(true);
       dispatch(
         removeFilter({ removedFilterOption, keyToFilter: "selectedJobRole" })
       );
@@ -49,53 +50,12 @@ export const RolesFilter = React.memo(() => {
     }
   };
 
-  useEffect(() => {
-    const isAnyOtherFilterSelected = isAnyOtherFilterAlreadySelected(
-      selectedFilters,
-      "selectedJobRole"
-    );
-    //if a filter option was removed from current filter and
-    // the length of filtered jobs was already null
-    // then on removal of the current filter option,
-    // we need to filter all the jobs according to all the other filters that are selected
-    // apart from the one which was removed.
-    if (
-      filterRemoved &&
-      isAnyOtherFilterSelected &&
-      filteredJobs &&
-      filteredJobs.length === 0
-    ) {
-      for (const filterType in selectedFilters) {
-        //below if statement checks if any other filter is selected apart from the current filter type
-        if (
-          selectedFilters[filterType] &&
-          selectedFilters[filterType].length > 0 &&
-          selectedFilters[filterType] !== "selectedJobRole"
-        ) {
-          dispatch(
-            updateFilteredJobs({
-              jobsToFilter: jobs,
-              selectedFilters,
-              keyToFilter: filterType,
-            })
-          );
-        }
-      }
-    } else {
-      const jobsToFilter = isAnyOtherFilterSelected ? filteredJobs : jobs;
-
-      if (Object.keys(selectedFilters).length > 0) {
-        dispatch(
-          updateFilteredJobs({
-            jobsToFilter,
-            selectedFilters,
-            keyToFilter: "selectedJobRole",
-          })
-        );
-      }
-    }
-    setFiterRemoved(false);
-  }, [selectedFilters["selectedJobRole"]]);
+  useFilteredJobsUpdater(
+    "selectedJobRole",
+    selectedFilters,
+    filterRemoved,
+    setFilterRemoved
+  );
 
   return (
     <>
@@ -103,8 +63,8 @@ export const RolesFilter = React.memo(() => {
         options={RoleFilterOption}
         getOptionLabel={(option) => option}
         onChange={handleFilterChange}
-        placeholder="Roles"
-        minWidth={200}
+        label="Roles"
+        minWidth={130}
       />
     </>
   );

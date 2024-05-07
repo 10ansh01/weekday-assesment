@@ -12,11 +12,15 @@ export const JobCardFoot = (props) => {
         <Grid item mb={1} sx={{ minHeight: "30px" }}>
           {props.minExp && (
             <>
-              <CustomTypography variant="h1">
+              <CustomTypography
+                variant="h1"
+                color="#8B8B8B"
+                sx={{ fontWeight: 600 }}
+              >
                 {" "}
                 Minimum experience
               </CustomTypography>
-              <CustomTypography variant="h1" color="textPrimary">
+              <CustomTypography variant="h1" color="#000000DE">
                 {props.minExp} years
               </CustomTypography>
             </>

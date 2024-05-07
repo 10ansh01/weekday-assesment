@@ -39,13 +39,17 @@ export const JobCardHead = (props) => {
               fontSize="13px"
               color="textSecondary"
               align="left"
+              sx={{
+                fontWeight: 700,
+              }}
             >
               {props.companyName}
             </CustomTypography>
             <CustomTypography
               variant="h3"
-              fontSize="13px"
-              color="textSecondary"
+              fontSize="14px"
+              color="black"
+              sx={{ marginTop: "3px" }}
             >
               {props.jobRole}
             </CustomTypography>
@@ -53,8 +57,9 @@ export const JobCardHead = (props) => {
           <Box component="div">
             <CustomTypography
               variant="h3"
-              fontSize="13px"
-              color="textSecondary"
+              fontSize="11px"
+              color="black"
+              sx={{ fontWeight: 200, marginTop: "5px" }}
             >
               {props.location}
             </CustomTypography>

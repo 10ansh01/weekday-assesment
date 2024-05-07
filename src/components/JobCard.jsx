@@ -21,7 +21,10 @@ const JobCard = (props) => {
   return (
     <JobCardView className="JobCard" square={false} elevation={1}>
       <JobCardHead {...props} />
-      <CustomTypography variant="body1" sx={{ minHeight: "20px" }}>
+      <CustomTypography
+        variant="body1"
+        sx={{ minHeight: "20px", fontWeight: 200, marginTop: "5px" }}
+      >
         Estimated Salary :{" "}
         {props.minJdSalary && currency + props.minJdSalary + "K" + " - "}
         {props.maxJdSalary && currency + props.maxJdSalary}K {"\u2705"}

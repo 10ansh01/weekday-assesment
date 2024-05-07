@@ -12,14 +12,16 @@ export const isAnyOtherFilterAlreadySelected = (
   for (const filterType in selectedFilters) {
     if (
       filterType !== "isFilterSelected" &&
+      filterType !== currentFilterKey &&
       selectedFilters.hasOwnProperty(filterType)
     ) {
       const filterArray = selectedFilters[filterType];
-      if (Array.isArray(filterArray) && filterArray.length > 0) {
+      if (filterArray && filterArray.length > 0) {
         isAnyOtherFilterAlreadySelected = Boolean(
           filterType !== currentFilterKey
         );
-        break; // Exit the loop early if any other filter is already selected
+        break;
+        //Exit the loop early if any other filter is already selected
       }
     }
   }

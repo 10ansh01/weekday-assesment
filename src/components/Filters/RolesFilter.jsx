@@ -20,6 +20,7 @@ export const RolesFilter = React.memo(() => {
   const dispatch = useDispatch();
 
   const [selectedFilterOptions, setSelectedFilterOptions] = useState([]);
+  const [filterRemoved, setFiterRemoved] = useState(true);
 
   const handleFilterChange = (newValue) => {
     setSelectedFilterOptions(newValue);
@@ -33,7 +34,7 @@ export const RolesFilter = React.memo(() => {
           removedFilterOption = element;
         }
       });
-
+      setFiterRemoved(true);
       dispatch(
         removeFilter({ removedFilterOption, keyToFilter: "selectedJobRole" })
       );
@@ -53,17 +54,47 @@ export const RolesFilter = React.memo(() => {
       selectedFilters,
       "selectedJobRole"
     );
-    const jobsToFilter = isAnyOtherFilterSelected ? filteredJobs : jobs;
+    //if a filter option was removed from current filter and
+    // the length of filtered jobs was already null
+    // then on removal of the current filter option,
+    // we need to filter all the jobs according to all the other filters that are selected
+    // apart from the one which was removed.
+    if (
+      filterRemoved &&
+      isAnyOtherFilterSelected &&
+      filteredJobs &&
+      filteredJobs.length === 0
+    ) {
+      for (const filterType in selectedFilters) {
+        //below if statement checks if any other filter is selected apart from the current filter type
+        if (
+          selectedFilters[filterType] &&
+          selectedFilters[filterType].length > 0 &&
+          selectedFilters[filterType] !== "selectedJobRole"
+        ) {
+          dispatch(
+            updateFilteredJobs({
+              jobsToFilter: jobs,
+              selectedFilters,
+              keyToFilter: filterType,
+            })
+          );
+        }
+      }
+    } else {
+      const jobsToFilter = isAnyOtherFilterSelected ? filteredJobs : jobs;
 
-    if (Object.keys(selectedFilters).length > 0) {
-      dispatch(
-        updateFilteredJobs({
-          jobsToFilter,
-          selectedFilters,
-          keyToFilter: "selectedJobRole",
-        })
-      );
+      if (Object.keys(selectedFilters).length > 0) {
+        dispatch(
+          updateFilteredJobs({
+            jobsToFilter,
+            selectedFilters,
+            keyToFilter: "selectedJobRole",
+          })
+        );
+      }
     }
+    setFiterRemoved(false);
   }, [selectedFilters["selectedJobRole"]]);
 
   return (

@@ -16,6 +16,10 @@ const JobListing = () => {
   const [loading, setLoading] = useState(false);
   const [firstLoad, setFirstLoad] = useState(false);
   const [errorState, setErrorState] = useState(false);
+  const [
+    noJobWithCurrentFilterCombination,
+    setNoJobWithCurrentFilterCombination,
+  ] = useState(false);
 
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs);
@@ -64,7 +68,16 @@ const JobListing = () => {
   };
 
   useEffect(() => {
-    setJobData(filteredJobs && filteredJobs.length > 0 ? filteredJobs : jobs);
+    if (
+      selectedFilters.isFilterSelected &&
+      filteredJobs &&
+      filteredJobs.length === 0
+    ) {
+      setNoJobWithCurrentFilterCombination(true);
+    } else {
+      setJobData(filteredJobs && filteredJobs.length > 0 ? filteredJobs : jobs);
+      setNoJobWithCurrentFilterCombination(false);
+    }
   }, [jobs.length, filteredJobs]);
 
   //I made a custom hook to implement infinite scroll functionality
@@ -77,16 +90,18 @@ const JobListing = () => {
     }
   }, []);
 
-  return (
-    <>
-      <Grid
-        container
-        direction="row"
-        style={{ height: "100%", marginTop: 0 }}
-        spacing={3}
-      >
-        {/* Error Handling */}
-        {errorState && (
+  // if no jobs are there with current filter noJobWithCurrentFilterCombination, return
+  // eg. Location is bangalore and job role is remote:
+  // If there is no remote job in bangalore, it will return
+  if (!errorState && noJobWithCurrentFilterCombination) {
+    return (
+      <>
+        <Grid
+          container
+          direction="row"
+          style={{ height: "100%", marginTop: 0 }}
+          spacing={3}
+        >
           <CustomTypography
             variant="h1"
             color="TextError"
@@ -97,10 +112,49 @@ const JobListing = () => {
               alignItems: "center",
             }}
           >
-            Error in loading Jobs. Please refresh the page...
+            No Jobs for this filter combination. Please refresh or change
+            filters.
           </CustomTypography>
-        )}
+        </Grid>
+      </>
+    );
+  }
 
+  // Handling error from API
+  if (errorState) {
+    return (
+      <>
+        <Grid
+          container
+          direction="row"
+          style={{ height: "100%", marginTop: 0 }}
+          spacing={3}
+        >
+          <CustomTypography
+            variant="h1"
+            color="TextError"
+            sx={{
+              margin: 10,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            OOPS! There was an error. Please referesh the page.
+          </CustomTypography>
+        </Grid>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Grid
+        container
+        direction="row"
+        style={{ height: "100%", marginTop: 0 }}
+        spacing={3}
+      >
         {/* Rendering Jobs */}
         {!errorState &&
           jobData &&

@@ -28,29 +28,20 @@ export const filterJobs = (jobs, selectedFilters, keyToFilter = null) => {
 };
 
 export const filterOnSiteOrRemote = (jobs, locationType) => {
+  if (locationType === undefined) {
+    return jobs;
+  }
+
   return jobs.filter((job) => {
-    //if Location Type is remote, then filter out remote jobs
-    if (
-      locationType &&
-      job.location === "remote" &&
-      locationType === "remote"
-    ) {
-      return true;
-    } else if (
-      //if location type is not remote, filter out onsite jobs
-      locationType &&
-      locationType !== "remote" &&
-      job.location !== "remote"
-    ) {
-      return true;
-    } else {
-      //if locationTypeIsUndefined, do not filter
-      return false;
+    if (locationType === "remote") {
+      return job.location === "remote";
     }
+
+    return job.location !== "remote";
   });
 };
 
-export const filterMoreThanBase = (jobs, requiredBasePay) => {
+export const filterMoreThanBase = (jobs, requiredBasePay = 0) => {
   return jobs.filter((job) => {
     if (job.minJdSalary >= requiredBasePay) {
       return true;

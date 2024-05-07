@@ -1,3 +1,5 @@
+//the key name of jobs is different from selectedFilter Key names.
+//So I created this map to map the selected filter values to job keys
 export const selectedFilterKeyMap = {
   selectedLocations: "location",
   selectedCompanyNames: "companyName",

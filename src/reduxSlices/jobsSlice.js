@@ -1,3 +1,4 @@
+// This slice contains all the jobs fetched from API
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];

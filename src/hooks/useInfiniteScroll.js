@@ -1,3 +1,5 @@
+//This hook triggers an API request(by calling fetch data function)
+//Whenever anby user scrolls to the bottom of screen
 import { useState, useEffect } from "react";
 
 const useInfiniteScroll = (action, offset) => {

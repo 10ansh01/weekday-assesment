@@ -1,3 +1,4 @@
+//This slice updates the filtered jobs
 import { createSlice } from "@reduxjs/toolkit";
 import {
   filterCompanyNames,

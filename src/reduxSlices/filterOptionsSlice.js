@@ -1,3 +1,4 @@
+//This slice provides options to filter from
 import { createSlice } from "@reduxjs/toolkit";
 import { combineAndSortArrays } from "./filterUtils/combine-and-sort-arrays";
 

@@ -17,36 +17,42 @@ export const filteredJobsSlice = createSlice({
       const { jobsToFilter, selectedFilters, keyToFilter } = action.payload;
       let filteredJobsList;
 
-      if (keyToFilter === "selectedCompanyNames") {
-        filteredJobsList = filterCompanyNames(
-          jobsToFilter,
-          selectedFilters["selectedCompanyNames"][0]
-        );
-      } else if (keyToFilter === "selectedExperience") {
-        filteredJobsList = filterExperience(
-          jobsToFilter,
-          selectedFilters["selectedExperience"][0]
-        );
-      } else if (keyToFilter === "selectedMinPay") {
-        filteredJobsList = filterMoreThanBase(
-          jobsToFilter,
-          selectedFilters["selectedMinPay"][0]
-        );
-      } else if (keyToFilter === "selectedWorkMode") {
-        filteredJobsList = filterOnSiteOrRemote(
-          jobsToFilter,
-          selectedFilters["selectedWorkMode"][0]
-        );
-      } else {
-        filteredJobsList = filterJobs(
-          jobsToFilter,
-          selectedFilters,
-          keyToFilter
-        );
+      switch (keyToFilter) {
+        case "selectedCompanyNames":
+          filteredJobsList = filterCompanyNames(
+            jobsToFilter,
+            selectedFilters["selectedCompanyNames"][0]
+          );
+          break;
+        case "selectedExperience":
+          filteredJobsList = filterExperience(
+            jobsToFilter,
+            selectedFilters["selectedExperience"][0]
+          );
+          break;
+        case "selectedMinPay":
+          filteredJobsList = filterMoreThanBase(
+            jobsToFilter,
+            selectedFilters["selectedMinPay"][0]
+          );
+          break;
+        case "selectedWorkMode":
+          filteredJobsList = filterOnSiteOrRemote(
+            jobsToFilter,
+            selectedFilters["selectedWorkMode"][0]
+          );
+          break;
+        default:
+          filteredJobsList = filterJobs(
+            jobsToFilter,
+            selectedFilters,
+            keyToFilter
+          );
       }
 
       //I am replacing the already present job data with the new filtered data.
-      //Because I want to be more sure that the saved data is correct according to the applied filters
+      //Because I want to be more sure that the saved data is correct according to the
+      //applied filters
       filteredJobsList && state.splice(0, state.length, ...filteredJobsList);
     },
   },

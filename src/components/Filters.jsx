@@ -24,6 +24,9 @@ export const Filters = () => {
       <Grid item>
         <LocationFilter />
       </Grid>
+      <Grid item>
+        <CompanyNameFilter />
+      </Grid>
     </Grid>
   );
 };
